@@ -6,3 +6,5 @@ class Owner(models.Model):
     edad = models.IntegerField(max_length=2)
     pais = models.CharField(max_length=20, default='')
 
+    def __str__(self):
+        return "{}", "{}", format(self.nombre, self.edad)
