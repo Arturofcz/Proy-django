@@ -1,0 +1,71 @@
+{% extends "owner/base_generic.html" %}
+
+
+{% block content %}
+<div><a href="http://unmsm.edu.pe" > U.N.M.S.</a> </div>
+<h2><em>Lista de Owner en la aplicación</em></h2>
+{#<p><strong> Nombre de owner: </strong>{{ data.nombre_owner}}</p>#}
+{#    {% if data.nombre_owner  %}#}
+{#        <p><strong> Nombre de owner: </strong>{{ data.nombre_owner}}#}
+{#    {% else %}#}
+{#        <p><strong> Nombre de owner: </strong><p class="name-null">Sin nombre</p></p>#}
+{#    {% endif %}#}
+{##}
+{#    {% if data.edad and data.dni %}#}
+{#        <p><strong>Edad de owner:</strong> {{ data.edad }} </p>#}
+{#        <p>El dato de edad del owner es correcto</p>#}
+{#    {% endif %}#}
+{##}
+{#    <p><strong>Pais: </strong>{{ data.pais }}</p>#}
+{##}
+{#    <p><strong>Dni: </strong>{{ data.dni }}</p>#}
+{##}
+{#    {% if data.dni %}#}
+{#        {% if not vigente %}#}
+{#            <h1>Su pase ya no esta vigente</h1>#}
+{#            {% endif %}#}
+{#    {% endif %}#}
+
+    <ul>
+    {% for owner in data reversed %}
+        <li>
+            <p><strong> Nombre de owner: </strong>{{ owner.nombre_owner}}
+            <p><strong> Edad: </strong>{{ owner.edad}}
+        </li>
+    {% endfor %}
+    </ul>
+
+    <h2>Aplicando Filtros:</h2>
+
+    <ul>
+    {% for owner in data reversed %}
+        <li>
+            <p><strong> Nombre de owner: </strong>{{ owner.nombre_owner|slugify}}
+        </li>
+    {% endfor %}
+    </ul>
+
+    <h3> La cantidad de Owner actualmente es : {{ data|length}}</h3>
+
+     <h3> Uso de UPPER</h3>
+
+    <ul>
+    {% for owner in data reversed %}
+        <li>
+            <p><strong> Nombre de owner: </strong>{{ owner.nombre_owner|upper}}
+        </li>
+    {% endfor %}
+    </ul>
+
+
+    <h3> Uso de CUT</h3>
+    <ul>
+    {% for owner in data reversed %}
+        <li>
+            <p><strong> Nombre de owner: </strong>{{ owner.nombre_owner|cut:" "}}
+        </li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}
+
