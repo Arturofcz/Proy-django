@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 
-import catalog.apps
+from app_pokemon.apps import catalog
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,11 +39,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'catalog.apps.CatalogConfig',
-    'owner.apps.OwnerConfig',
+    'app_pokemon.apps.catalog.apps.CatalogConfig',
+    'app_pokemon.apps.owner.apps.OwnerConfig',
     'pokemon.apps.PokemonConfig',
+    'rest_framework',
+    'rest_framework_simplejwt',
 
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -13,13 +13,26 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+# Se agrega las url que necesitamos para generar nuestros JWT en Django
+from rest_framework_simplejwt import views as jwt_views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('owner/', include('owner.urls')),
-    path('catalog/', include('catalog.urls')),
-    path('pokemon/', include('pokemon.urls'))
+    path('owner/', include('app_pokemon.apps.owner.urls')),
+    path('catalog/', include('app_pokemon.apps.catalog.urls')),
+    path('pokemon/', include('pokemon.urls')),
 
-]
+    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+
+    path('api/', include('app_pokemon.apps.owner.urls')),
+
+    ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
