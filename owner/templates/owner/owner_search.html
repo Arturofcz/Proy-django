@@ -1,0 +1,27 @@
+{% extends "owner/base_generic.html" %}
+
+{% block content %}
+    <div>
+        <form  action="." method="GET">
+            <label> Busqueda: </label>
+            <input type="text" name="q" value="{{ query | escape }}">
+        </form>
+    </div>
+
+    {% if query %}
+        <h2>Resultados para "{{ query|escape }}"</h2>
+
+        {% if data %}
+            <ul>
+            {% for owner in data %}
+                <li>{{ owner.nombre }} es de {{ owner.pais }} que tiene {{ owner.edad }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No se han encontrado owners con la coincidencia</p>
+        {% endif %}
+
+    {% endif %}
+
+
+{% endblock %}
