@@ -1,0 +1,31 @@
+{% extends "owner/base_generic.html" %}
+
+{% block content %}
+    <div><a href="http://unmsm.edu.pe"><strong>U.N.M.S.M.</strong></a></div>
+    <p>Lista de Owners registrados</p>
+    <div class="card-body">
+        <form action="" method="post"></form>
+         {% csrf_token %}
+        <table class="table table-striped">
+            <thead>
+                <th scope="col">#</th>
+                <th scope="col">Descripción</th>
+              <th scope="col">Acción</th>
+            </thead>
+            <tbody>
+                {% for owner in data %}
+                    <tr>
+                       <th scope="row">{{ forloop.counter }}</th>
+                       <td><p>{{ owner.nombre }} tiene {{ owner.edad }} años y es de {{ owner.pais }}</p></td>
+                       <td>
+                           <a type="button" class="btn btn-info" href="{% url 'owner_edit' owner.id %}">Editar Owner</a>
+                           <a type="button" class="btn btn-danger" href="{% url 'owner_delete' owner.id %}">Eliminar Owner</a>
+                       </td>
+{#                        <th scope="row">{{ forloop.counter }}</th>#}
+{#                        <td><p>{{ owner.nombre }} tiene {{ owner.edad }} años y es de {{ owner.pais }}</p></td>#}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

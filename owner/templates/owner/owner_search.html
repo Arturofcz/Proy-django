@@ -1,27 +1,23 @@
 {% extends "owner/base_generic.html" %}
 
 {% block content %}
-    <div>
-        <form  action="." method="GET">
-            <label> Busqueda: </label>
-            <input type="text" name="q" value="{{ query | escape }}">
+     <label>Búsqueda: </label>
+    <div class="mb-6">
+        <form class="d-flex" method="GET">
+            <input class="input-group mb-6" placeholder="Ingrese nombre de Owner a buscar" type="text" name="q" value="{{ query | escape }}">
         </form>
     </div>
 
     {% if query %}
-        <h2>Resultados para "{{ query|escape }}"</h2>
-
+        <h2>Resultados para: "{{ query|escape }}"</h2>
         {% if data %}
             <ul>
-            {% for owner in data %}
-                <li>{{ owner.nombre }} es de {{ owner.pais }} que tiene {{ owner.edad }}</li>
-            {% endfor %}
+                {% for owner in data %}
+                    <li>{{ owner.nombre }} es de {{ owner.pais }} y tiene {{ owner.edad }} años de edad</li>
+                {% endfor %}
             </ul>
         {% else %}
-            <p>No se han encontrado owners con la coincidencia</p>
+            <p>No se han encontrado owners con la coincidencia "{{ query|escape }}"</p>
         {% endif %}
-
     {% endif %}
-
-
 {% endblock %}
